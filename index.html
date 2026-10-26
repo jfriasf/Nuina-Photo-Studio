@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Nuna Photo Studio</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="description" content="Nuna Photo Studio: fotografía de retratos, sesiones y eventos, y alquiler de estudio en Santo Domingo.">
@@ -140,7 +145,7 @@ section.block { padding-block: 72px 0; }
   .hero-chip .dot { animation: rec 1.8s ease-in-out infinite; }
   @keyframes rec { 50% { opacity: .25; } }
   .hero h1 { animation: rise .9s cubic-bezier(.2,.7,.2,1) both; }
-  @keyframes rise { from { transform: translateY(18px); opacity: .2; } to { transform: none; opacity: 1; } }
+  @keyframes rise { from { transform: translateY(18px); } to { transform: none; } }
   .ticker-track { animation: tick 38s linear infinite; }
   @keyframes tick { to { transform: translateX(-50%); } }
 }
@@ -196,7 +201,7 @@ section.block { padding-block: 72px 0; }
 .pf-empty { color: var(--gray); padding-block: 40px; }
 @media (prefers-reduced-motion: no-preference) {
   .pf.in { animation: pfin .5s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 40ms); }
-  @keyframes pfin { from { opacity: 0; transform: translateY(14px) scale(.98); } to { opacity: 1; transform: none; } }
+  @keyframes pfin { from { transform: translateY(14px) scale(.98); } to { transform: none; } }
 }
 
 /* Redes sociales */
@@ -214,7 +219,7 @@ section.block { padding-block: 72px 0; }
 .social-float.open .sf-toggle svg { transform: rotate(90deg); }
 @media (prefers-reduced-motion: no-preference) {
   .sf-list .soc { animation: pop .5s cubic-bezier(.2,.8,.2,1.2) both; animation-delay: calc(var(--i) * 70ms + .3s); }
-  @keyframes pop { from { transform: translateX(30px) scale(.6); opacity: 0; } to { transform: none; opacity: 1; } }
+  @keyframes pop { from { transform: translateX(30px) scale(.6); } to { transform: none; } }
   .sf-list .soc:hover { animation: none; transform: translateX(-4px) scale(1.06); }
 }
 @media (max-width: 760px) {
@@ -302,9 +307,11 @@ footer.site p { font-size: 14px; color: var(--gray); }
 
 @media (prefers-reduced-motion: no-preference) {
   .view:not([hidden]) { animation: develop .5s ease-out both; }
-  @keyframes develop { from { opacity: .4; filter: grayscale(1) contrast(.8); } to { opacity: 1; filter: none; } }
+  @keyframes develop { from { transform: translateY(8px); } to { transform: none; } }
 }
 </style>
+</head>
+<body>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="i-wa" viewBox="0 0 24 24"><path d="M3.6 20.4l1.2-4.1a8.4 8.4 0 1 1 3.3 3.1z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path fill="currentColor" d="M9.1 7.6c.2-.4.4-.4.7-.4h.5c.2 0 .4 0 .5.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.1.1-.2.3 0 .5.5.9 1.2 1.6 2.1 2.1.2.1.4.1.5 0l.7-.8c.2-.2.4-.2.6-.1l1.6.8c.2.1.4.2.4.4 0 .5-.1 1.1-.5 1.5-.5.5-1.5.8-2.4.5-1.6-.5-3-1.5-4.1-2.9-.8-1.1-1.2-2.1-1.1-3 .1-.7.3-1.3.5-1.5z"/></symbol>
@@ -991,3 +998,5 @@ footer.site p { font-size: 14px; color: var(--gray); }
   }
 })();
 </script>
+</body>
+</html>
