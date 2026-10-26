@@ -43,6 +43,10 @@
 }
 
 * { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+img, svg { max-width: 100%; }
+[hidden] { display: none !important; }
 body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
 a { color: inherit; }
 :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
@@ -75,6 +79,22 @@ nav.main ul { display: flex; gap: 4px; list-style: none; margin: 0; padding: 0; 
 nav.main a { display: block; text-decoration: none; font-size: 14px; padding: 6px 12px; border-radius: 999px; color: var(--ink-soft); }
 nav.main a:hover { color: var(--ink); }
 nav.main a[aria-current="page"] { background: var(--ink); color: var(--paper); }
+.menu-btn { display: none; width: 44px; height: 44px; border: 1px solid var(--line); border-radius: 50%; background: transparent; color: var(--ink); cursor: pointer; place-items: center; }
+.menu-btn i, .menu-btn i::before, .menu-btn i::after { display: block; width: 18px; height: 1.5px; background: currentColor; position: relative; transition: transform .25s, background .25s; }
+.menu-btn i::before, .menu-btn i::after { content: ""; position: absolute; left: 0; }
+.menu-btn i::before { top: -6px; } .menu-btn i::after { top: 6px; }
+header.site.open .menu-btn i { background: transparent; }
+header.site.open .menu-btn i::before { transform: translateY(6px) rotate(45deg); }
+header.site.open .menu-btn i::after { transform: translateY(-6px) rotate(-45deg); }
+@media (max-width: 759px) {
+  .bar { flex-wrap: nowrap; padding-block: 10px; }
+  .brand .logo-full { width: 104px; }
+  .menu-btn { display: grid; }
+  nav.main { display: none; position: absolute; top: 100%; left: 0; right: 0; overflow: visible; background: var(--paper); border-bottom: 1px solid var(--line); box-shadow: 0 16px 30px rgba(0,0,0,.08); }
+  header.site.open nav.main { display: block; }
+  nav.main ul { flex-direction: column; gap: 2px; padding: 8px max(16px, env(safe-area-inset-right, 0px)) 16px max(16px, env(safe-area-inset-left, 0px)); }
+  nav.main a { font-size: 17px; padding: 12px 16px; border-radius: 12px; }
+}
 
 /* Botones */
 .btn { display: inline-flex; align-items: center; gap: 10px; font: 500 15px/1 var(--body); padding: 15px 22px; border-radius: 999px; text-decoration: none; border: 1px solid var(--btn-bg); background: var(--btn-bg); color: var(--btn-fg); cursor: pointer; }
@@ -222,12 +242,30 @@ section.block { padding-block: 72px 0; }
   @keyframes pop { from { transform: translateX(30px) scale(.6); } to { transform: none; } }
   .sf-list .soc:hover { animation: none; transform: translateX(-4px) scale(1.06); }
 }
-@media (max-width: 760px) {
+@media (max-width: 1279px) {
   .social-float { top: auto; transform: none; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); right: calc(16px + env(safe-area-inset-right, 0px)); }
   .sf-toggle { display: grid; }
   .sf-list { display: none; }
   .social-float.open .sf-list { display: grid; }
   .sf-list .soc::before { opacity: 1; transform: translate(0, -50%); }
+}
+/* Ajustes de lectura y toque en pantallas pequeñas */
+.frame .exif, .pf figcaption span { font-size: 12px; }
+.mini { min-height: 40px; display: inline-flex; align-items: center; padding: 0 14px; }
+.svc a.more, a.meta[data-go] { display: inline-flex; align-items: center; min-height: 40px; }
+.terms-toc a { padding-block: 8px; }
+.chip { min-height: 42px; }
+.form-terms a { display: inline-block; padding-block: 10px; }
+@media (max-width: 759px) {
+  .hours { grid-template-columns: 1fr; gap: 0; }
+  .hours dd { margin-bottom: 8px; }
+  footer.site .wrap { flex-direction: column; text-align: center; gap: 14px; padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+  footer.site .soc-row { justify-content: center; }
+  .cta-band .wrap { padding-block: 48px; }
+  section.block { padding-block: 56px 0; }
+  .page-title { padding-block: 40px 0; }
+  .lede { font-size: 17px; }
+  form.booking { padding: 20px; }
 }
 .toast { position: fixed; z-index: 30; left: 50%; bottom: calc(24px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 20px); background: var(--ink); color: var(--paper); padding: 10px 16px; border-radius: 999px; font-size: 14px; opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
@@ -332,7 +370,8 @@ footer.site p { font-size: 14px; color: var(--gray); }
 <header class="site">
   <div class="wrap bar">
     <a class="brand" href="#inicio" data-go="inicio" aria-label="Nuna Photo Studio, inicio"><span class="logo logo-full"></span></a>
-    <nav class="main" aria-label="Principal">
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><i></i></button>
+    <nav class="main" id="main-nav" aria-label="Principal">
       <ul>
         <li><a href="#inicio" data-go="inicio">Inicio</a></li>
         <li><a href="#servicios" data-go="servicios">Servicios</a></li>
@@ -761,7 +800,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
 
   // Opciones del formulario
   var sel = document.getElementById("f-servicio");
-  var opts = PLANS.map(function (p) { return "Plan " + p.name + " (RD$" + fmt(p.price) + ")"; })
+  var opts = PLANS.map(function (p) { return p.name + " (RD$" + fmt(p.price) + ")"; })
     .concat(["Cobertura de evento (cotización)", "Alquiler de estudio (cotización)", "Otro / no estoy seguro"]);
   sel.innerHTML = opts.map(function (o) { return "<option>" + o + "</option>"; }).join("");
 
@@ -780,7 +819,16 @@ footer.site p { font-size: 14px; color: var(--gray); }
     var label = navLink ? navLink.textContent : document.getElementById("v-" + name).getAttribute("data-title");
     document.title = name === "inicio" ? "Nuna Photo Studio" : label + " · Nuna Photo Studio";
     if (scroll) window.scrollTo(0, 0);
+    setMenu(false);
   }
+  var header = document.querySelector("header.site"), menuBtn = document.getElementById("menu-btn");
+  function setMenu(open) {
+    header.classList.toggle("open", open);
+    menuBtn.setAttribute("aria-expanded", open);
+    menuBtn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
+  }
+  menuBtn.addEventListener("click", function () { setMenu(!header.classList.contains("open")); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") setMenu(false); });
   // Índice de términos: desplaza dentro de la página sin cambiar de vista
   document.querySelectorAll(".terms-toc a").forEach(function (a) {
     a.addEventListener("click", function (e) {
@@ -795,7 +843,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
     e.preventDefault();
     var plan = a.getAttribute("data-plan");
     if (plan) {
-      for (var i = 0; i < sel.options.length; i++) if (sel.options[i].text.indexOf("Plan " + plan + " (") === 0) sel.selectedIndex = i;
+      for (var i = 0; i < sel.options.length; i++) if (sel.options[i].text.indexOf(plan + " (") === 0) sel.selectedIndex = i;
       update();
     }
     var service = a.getAttribute("data-service");
