@@ -210,7 +210,27 @@ section.block { padding-block: 72px 0; }
     radial-gradient(ellipse 120% 80% at 50% 115%, var(--frame-b) 0%, transparent 62%),
     var(--frame-a); }
 .pf.w { grid-column: span 2; } .pf.t { grid-row: span 2; } .pf.big { grid-column: span 2; grid-row: span 2; }
-.pf img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.pf.xl { grid-column: span 2; grid-row: span 3; }
+.pf { cursor: zoom-in; }
+.pf img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 25%; display: block; transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+
+/* Protección de fotos: sin menú contextual, arrastre ni selección */
+.pf, .pf img, .lb img { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-user-drag: none; }
+.pf img, .lb img { pointer-events: none; }
+
+/* Visor de fotos */
+.lb { position: fixed; inset: 0; z-index: 40; background: rgba(8,8,9,.97); display: grid; grid-template-rows: auto 1fr auto; padding: calc(12px + env(safe-area-inset-top, 0px)) max(12px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px)); color: #f3f3f2; }
+.lb-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: rgba(243,243,242,.7); }
+.lb-stage { position: relative; display: grid; place-items: center; min-height: 0; padding-block: 12px; }
+.lb-stage img { position: absolute; top: 12px; bottom: 12px; left: 60px; right: 60px; width: calc(100% - 120px); height: calc(100% - 24px); max-width: none; object-fit: contain; }
+@media (max-width: 759px) { .lb-stage img { left: 0; right: 0; width: 100%; } }
+.lb-shield { position: absolute; inset: 0; }
+.lb-cap { text-align: center; font-size: 16px; font-weight: 500; }
+.lb-btn { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(243,243,242,.3); background: rgba(10,10,11,.5); color: #f3f3f2; font-size: 22px; line-height: 1; cursor: pointer; display: grid; place-items: center; }
+.lb-btn:hover { border-color: #f3f3f2; }
+.lb-prev, .lb-next { position: absolute; top: 50%; transform: translateY(-50%); z-index: 1; }
+.lb-prev { left: 0; } .lb-next { right: 0; }
+body.lb-open { overflow: hidden; }
 .pf::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,.6), transparent 55%); opacity: .75; transition: opacity .3s; }
 .pf figcaption { position: absolute; z-index: 1; left: 14px; right: 14px; bottom: 12px; display: grid; gap: 2px; color: #f3f3f2; }
 .pf figcaption b { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
@@ -366,6 +386,16 @@ footer.site p { font-size: 14px; color: var(--gray); }
   <button class="sf-toggle" id="sf-toggle" type="button" aria-expanded="false" aria-controls="sf-list" aria-label="Mostrar redes sociales"><svg><use href="#i-share"/></svg></button>
 </aside>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
+  <div class="lb-top"><span id="lb-count"></span><button class="lb-btn" type="button" id="lb-close" aria-label="Cerrar">×</button></div>
+  <div class="lb-stage">
+    <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Foto anterior">‹</button>
+    <img id="lb-img" alt="" draggable="false">
+    <div class="lb-shield" aria-hidden="true"></div>
+    <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Foto siguiente">›</button>
+  </div>
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
 
 <header class="site">
   <div class="wrap bar">
@@ -947,8 +977,9 @@ footer.site p { font-size: 14px; color: var(--gray); }
 
   document.getElementById("yr").textContent = new Date().getFullYear();
 
-  // Portafolio. Para usar fotos reales, añade src: "ruta/de/la/foto.jpg" a cada trabajo.
-  // Tamaños: "" normal, "w" ancho, "t" alto, "big" grande.
+  // Portafolio. Cada trabajo apunta a su foto en la carpeta fotos/.
+  // Tamaños: "" normal, "w" ancho, "t" alto, "xl" destacado (2 columnas x 3 filas).
+  // Las categorías sin fotos no aparecen en los filtros.
   var CATS = [
     { id: "estudio", label: "Retrato de estudio" },
     { id: "bodas", label: "Bodas" },
@@ -957,33 +988,39 @@ footer.site p { font-size: 14px; color: var(--gray); }
     { id: "eventos", label: "Eventos" }
   ];
   var WORKS = [
-    { cat: "estudio", title: "Retrato en clave baja", size: "big", lx: "40%", ly: "35%" },
-    { cat: "bodas", title: "El sí, acepto", size: "t", lx: "60%", ly: "30%" },
-    { cat: "quince", title: "Sesión de quince", size: "", lx: "50%", ly: "45%" },
-    { cat: "grad", title: "Toga y birrete", size: "", lx: "35%", ly: "40%" },
-    { cat: "eventos", title: "Celebración de cumpleaños", size: "w", lx: "70%", ly: "50%" },
-    { cat: "estudio", title: "Perfil profesional", size: "", lx: "55%", ly: "35%" },
-    { cat: "quince", title: "Vestido y ciclorama", size: "t", lx: "45%", ly: "30%" },
-    { cat: "bodas", title: "Primer baile", size: "w", lx: "50%", ly: "55%" },
-    { cat: "grad", title: "Retrato de graduación", size: "t", lx: "50%", ly: "32%" },
-    { cat: "estudio", title: "Sesión familiar", size: "w", lx: "30%", ly: "45%" },
-    { cat: "eventos", title: "Evento corporativo", size: "", lx: "65%", ly: "40%" },
-    { cat: "bodas", title: "Detalles de la novia", size: "", lx: "40%", ly: "50%" },
-    { cat: "quince", title: "El vals", size: "big", lx: "55%", ly: "42%" },
-    { cat: "grad", title: "Con la familia", size: "w", lx: "45%", ly: "50%" },
-    { cat: "eventos", title: "Baby shower", size: "t", lx: "50%", ly: "38%" },
-    { cat: "estudio", title: "Luz de ventana", size: "", lx: "25%", ly: "35%" }
+    { cat: "quince", title: "Corona y rosas", src: "fotos/retrato-quincenanera-3.jpg", size: "xl" },
+    { cat: "estudio", title: "Flores y color", src: "fotos/retrato-modelo-femenina-4.jpg", size: "t" },
+    { cat: "bodas", title: "Los novios", src: "fotos/boda-1.jpg", size: "t" },
+    { cat: "grad", title: "Graduada", src: "fotos/graduacion-1.jpg", size: "t" },
+    { cat: "estudio", title: "Sesión de pareja", src: "fotos/foto-de-pareja.jpg", size: "t" },
+    { cat: "quince", title: "En las escalinatas", src: "fotos/retrato-quincenanera-2.jpg", size: "w" },
+    { cat: "estudio", title: "Sesión de maternidad", src: "fotos/retrato-de-embarazada.jpg", size: "t" },
+    { cat: "estudio", title: "Rojo intenso", src: "fotos/retrato-modelo-femenina-5.jpg", size: "t" },
+    { cat: "grad", title: "El anillo", src: "fotos/graduacion-3.jpg", size: "t" },
+    { cat: "estudio", title: "Editorial con globos", src: "fotos/retrato-modelo-femenina-1.jpg", size: "w" },
+    { cat: "estudio", title: "En familia", src: "fotos/foto-familiar.jpg", size: "xl" },
+    { cat: "estudio", title: "Retrato masculino", src: "fotos/retrato-masculino-1.jpg", size: "t" },
+    { cat: "bodas", title: "El ramo", src: "fotos/boda-2.jpg", size: "t" },
+    { cat: "estudio", title: "Primeros meses", src: "fotos/retrato-de-nino-1.jpg", size: "t" },
+    { cat: "estudio", title: "Cake smash", src: "fotos/retrato-de-nino-3.jpg", size: "w" },
+    { cat: "quince", title: "Quinceañera", src: "fotos/retrato-quincenanera-1.jpg", size: "t" },
+    { cat: "estudio", title: "Elegancia en negro", src: "fotos/retrato-modelo-femenina-3.jpg", size: "t" },
+    { cat: "grad", title: "Toga y birrete", src: "fotos/graduacion-2.jpg", size: "t" },
+    { cat: "estudio", title: "Mamá e hijo", src: "fotos/foto-familiar-2.jpg", size: "t" },
+    { cat: "estudio", title: "Estilo urbano", src: "fotos/retrato-masculino-2.jpg", size: "t" },
+    { cat: "estudio", title: "Entre rosas", src: "fotos/retrato-modelo-femenina-5-b.jpg", size: "t" },
+    { cat: "estudio", title: "Pose en estudio", src: "fotos/retrato-modelo-femenina-2.jpg", size: "t" }
   ];
   var catLabel = {}; CATS.forEach(function (c) { catLabel[c.id] = c.label; });
   var grid = document.getElementById("pf-grid");
   grid.innerHTML = WORKS.map(function (w, i) {
-    return '<figure class="pf ' + w.size + '" data-cat="' + w.cat + '" style="--lx:' + w.lx + ';--ly:' + w.ly + '">' +
-      (w.src ? '<img src="' + w.src + '" alt="' + w.title + '" loading="lazy">' : '') +
+    return '<figure class="pf ' + w.size + '" data-cat="' + w.cat + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Ver ' + w.title + '">' +
+      (w.src ? '<img src="' + w.src + '" alt="' + w.title + '" loading="lazy" draggable="false">' : '') +
       '<figcaption><span>' + catLabel[w.cat] + '</span><b>' + w.title + '</b></figcaption></figure>';
   }).join("");
   var filters = document.getElementById("filters");
   var count = function (id) { return WORKS.filter(function (w) { return id === "all" || w.cat === id; }).length; };
-  filters.innerHTML = [{ id: "all", label: "Todos" }].concat(CATS).map(function (c, i) {
+  filters.innerHTML = [{ id: "all", label: "Todos" }].concat(CATS.filter(function (c) { return count(c.id) > 0; })).map(function (c, i) {
     return '<button class="chip" type="button" data-filter="' + c.id + '" aria-pressed="' + (i === 0) + '">' + c.label + '<span class="n">' + count(c.id) + '</span></button>';
   }).join("");
   function applyFilter(id) {
@@ -1000,6 +1037,52 @@ footer.site p { font-size: 14px; color: var(--gray); }
   filters.addEventListener("click", function (e) {
     var b = e.target.closest("[data-filter]");
     if (b) applyFilter(b.getAttribute("data-filter"));
+  });
+
+  // Protección: bloquea clic derecho, arrastre y pulsación larga sobre las fotos
+  ["contextmenu", "dragstart"].forEach(function (ev) {
+    document.addEventListener(ev, function (e) {
+      if (e.target.closest(".pf, .lb-stage, .frame")) { e.preventDefault(); if (ev === "contextmenu") showToast("Las fotos de Nuna Photo Studio están protegidas"); }
+    });
+  });
+
+  // Visor de fotos (respeta el filtro activo)
+  var lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img"), lbCap = document.getElementById("lb-cap"), lbCount = document.getElementById("lb-count");
+  var lbList = [], lbPos = 0, lbReturn = null;
+  function lbShow() {
+    var w = WORKS[lbList[lbPos]];
+    lbImg.src = w.src; lbImg.alt = w.title;
+    lbCap.textContent = w.title;
+    lbCount.textContent = catLabel[w.cat] + " · " + (lbPos + 1) + " / " + lbList.length;
+  }
+  function lbOpen(i) {
+    lbList = Array.prototype.filter.call(grid.querySelectorAll(".pf"), function (el) { return !el.hidden; })
+      .map(function (el) { return +el.getAttribute("data-i"); });
+    lbPos = Math.max(0, lbList.indexOf(i));
+    lbReturn = document.activeElement;
+    lb.hidden = false; document.body.classList.add("lb-open");
+    lbShow(); document.getElementById("lb-close").focus();
+  }
+  function lbClose() { lb.hidden = true; document.body.classList.remove("lb-open"); if (lbReturn) lbReturn.focus(); }
+  function lbStep(d) { lbPos = (lbPos + d + lbList.length) % lbList.length; lbShow(); }
+  grid.addEventListener("click", function (e) { var f = e.target.closest(".pf"); if (f) lbOpen(+f.getAttribute("data-i")); });
+  grid.addEventListener("keydown", function (e) { var f = e.target.closest(".pf"); if (f && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); lbOpen(+f.getAttribute("data-i")); } });
+  document.getElementById("lb-close").addEventListener("click", lbClose);
+  document.getElementById("lb-prev").addEventListener("click", function () { lbStep(-1); });
+  document.getElementById("lb-next").addEventListener("click", function () { lbStep(1); });
+  lb.addEventListener("click", function (e) { if (e.target === lb || e.target.classList.contains("lb-stage")) lbClose(); });
+  document.addEventListener("keydown", function (e) {
+    if (lb.hidden) return;
+    if (e.key === "Escape") lbClose();
+    if (e.key === "ArrowLeft") lbStep(-1);
+    if (e.key === "ArrowRight") lbStep(1);
+  });
+  var touchX = null;
+  lb.addEventListener("touchstart", function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+  lb.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX; touchX = null;
+    if (Math.abs(dx) > 50) lbStep(dx < 0 ? 1 : -1);
   });
 
   // Redes sociales: barra flotante, contacto y pie
