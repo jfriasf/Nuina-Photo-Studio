@@ -18,8 +18,8 @@
     "postalCode": "11404",
     "addressCountry": "DO"
   },
-  "geo": { "@type": "GeoCoordinates", "latitude": 18.55018, "longitude": -69.85361 },
-  "hasMap": "https://www.google.com/maps/search/?api=1&query=H42W%2B3G9%2C%20Santo%20Domingo%2011404",
+  "geo": { "@type": "GeoCoordinates", "latitude": 18.5501543, "longitude": -69.8536108 },
+  "hasMap": "https://www.google.com/maps?cid=18355451297895326411",
   "areaServed": "Santo Domingo",
   "openingHoursSpecification": [
     { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "19:00" },
