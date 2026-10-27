@@ -325,6 +325,10 @@ footer.site .wrap > a[data-go="terminos"]:hover { color: var(--ink); text-decora
 @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: 64px; } }
 .split > * { min-width: 0; }
 .prose { display: grid; gap: 18px; color: var(--ink-soft); max-width: 60ch; }
+.person-name { font-size: clamp(30px, 4.5vw, 44px); color: var(--ink); }
+.facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-block: 16px; border-block: 1px solid var(--line); }
+.facts dt { margin-bottom: 4px; } .facts dd { margin: 0; color: var(--ink); font-weight: 500; }
+@media (max-width: 420px) { .facts { grid-template-columns: 1fr; } }
 .page-title { padding-block: 64px 0; display: grid; gap: 18px; }
 .page-title h1 { font-size: clamp(44px, 7.5vw, 88px); letter-spacing: -.04em; }
 
@@ -615,6 +619,24 @@ footer.site p { font-size: 14px; color: var(--gray); }
       </div>
       <div class="frame mark-frame" aria-hidden="true"><i class="corner tl"></i><i class="corner tr"></i><span class="logo logo-mark"></span><div class="exif"><span>Nuna Photo Studio</span><span>Santo Domingo</span></div></div>
     </section>
+    <section class="block">
+      <div class="block-head"><h2>La fotógrafa</h2><p class="meta">Fundadora de Nuna Photo Studio</p></div>
+      <div class="split">
+        <div class="frame" aria-hidden="true"><i class="corner tl"></i><i class="corner tr"></i><div class="exif"><span>Dariana Méndez Ramírez</span><span>85mm · f/2</span></div></div>
+        <div class="prose">
+          <h3 class="person-name">Dariana Méndez Ramírez</h3>
+          <dl class="facts">
+            <div><dt class="meta">Experiencia</dt><dd>Más de 7 años</dd></div>
+            <div><dt class="meta">Especialidad</dt><dd>Retrato, quinceaños, graduaciones y bodas</dd></div>
+          </dl>
+          <p>Detrás de cada foto de Nuna está Dariana, fotógrafa profesional de 29 años con más de 7 años de experiencia frente y detrás de la cámara.</p>
+          <p>Es madre y una mujer luchadora que convirtió su pasión por la fotografía en su propio estudio. Esa misma constancia es la que pone en cada sesión: escucha lo que buscas, te guía con paciencia y cuida cada detalle de la luz y la pose.</p>
+          <p>Para Dariana, fotografiar es guardar momentos que las familias van a mirar durante años. Por eso trata cada sesión como si fuera la de alguien de su propia familia.</p>
+          <div class="btn-row"><a class="btn" href="#contacto" data-go="contacto">Reserva con Dariana</a></div>
+        </div>
+      </div>
+    </section>
+
     <section class="block">
       <div class="block-head"><h2>Cómo trabajamos</h2></div>
       <div class="grid3">
