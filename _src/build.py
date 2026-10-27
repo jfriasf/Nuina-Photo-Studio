@@ -26,7 +26,7 @@ ROOT = os.path.dirname(SRC)
 SITE = "https://nunaphotostudio.com"
 
 # Contador de visitas de Umami (umami.is). Pega aquí el "Website ID" para activarlo.
-UMAMI_WEBSITE_ID = ""
+UMAMI_WEBSITE_ID = "00bdd712-a1aa-4d67-a3c3-d39706f41eab"
 
 NAV = [("/", "Inicio"), ("/servicios/", "Servicios"), ("/portafolio/", "Portafolio"),
        ("/planes/", "Planes"), ("/nosotros/", "Sobre nosotros"), ("/contacto/", "Contacto")]
