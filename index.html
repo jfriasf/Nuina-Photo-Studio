@@ -240,6 +240,11 @@ body.lb-open { overflow: hidden; }
 .pf figcaption span { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; opacity: .75; }
 .pf:hover img { transform: scale(1.05); }
 .pf:hover::after { opacity: 1; }
+.svc .frame.photo img { transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .6s ease; }
+@media (hover: hover) {
+  .svc .frame.photo img { filter: grayscale(1); }
+  .svc:hover .frame.photo img { filter: none; transform: scale(1.05); }
+}
 .pf[hidden] { display: none !important; }
 .pf-empty { color: var(--gray); padding-block: 40px; }
 @media (prefers-reduced-motion: no-preference) {
@@ -318,12 +323,14 @@ footer.site .wrap > a[data-go="terminos"]:hover { color: var(--ink); text-decora
 .spec { display: grid; grid-template-columns: 1fr; border-top: 1px solid var(--line); }
 @media (min-width: 760px) { .spec { grid-template-columns: repeat(2, 1fr); column-gap: 48px; } }
 .spec div { display: grid; grid-template-columns: 130px 1fr; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--line); }
+.spec.one { grid-template-columns: 1fr; margin-top: 32px; }
 .spec dt { margin: 0; } .spec dd { margin: 0; color: var(--ink-soft); }
 
 /* Dos columnas */
 .split { display: grid; gap: 40px; grid-template-columns: 1fr; align-items: start; }
 @media (min-width: 900px) { .split { grid-template-columns: 1fr 1fr; gap: 64px; } }
 .split > * { min-width: 0; }
+@media (min-width: 900px) { .split.fit { align-items: stretch; } .split.fit > .frame { aspect-ratio: auto; height: 100%; } .split.fit > .frame img { object-position: 50% 30%; } }
 .prose { display: grid; gap: 18px; color: var(--ink-soft); max-width: 60ch; }
 .person-name { font-size: clamp(30px, 4.5vw, 44px); color: var(--ink); }
 .facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-block: 16px; border-block: 1px solid var(--line); }
@@ -459,7 +466,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
     <div class="block-head"><h2>Lo que hacemos</h2><p class="meta">3 servicios</p></div>
     <div class="grid3">
       <article class="svc">
-        <div class="frame wide" aria-hidden="true"><div class="exif"><span>Retrato</span><span>f/2.8</span></div></div>
+        <div class="frame wide photo"><img src="fotos/retrato-de-nino-2.jpg" alt="Dos niñas con vestidos rojos y peluches sobre una manta rosada en el parque" loading="lazy" draggable="false"><div class="exif" aria-hidden="true"><span>Retrato</span><span>f/2.8</span></div></div>
         <h3>Sesiones de retrato</h3>
         <p>Retratos individuales, de pareja y familiares en estudio, con dirección de pose y retoque profesional.</p>
         <a class="more" href="#planes" data-go="planes">Ver planes y precios</a>
@@ -495,7 +502,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
     </div>
 
     <section class="block split">
-      <div class="frame" aria-hidden="true"><i class="corner tl"></i><i class="corner tr"></i><div class="exif"><span>Retrato</span><span>85mm · f/2.8</span></div></div>
+      <div class="frame photo"><img src="fotos/retrato-modelo-femenina-2.jpg" alt="Retrato de estudio de una modelo" loading="lazy" draggable="false" style="object-position: 50% 25%"><i class="corner tl"></i><i class="corner tr"></i><div class="exif" aria-hidden="true"><span>Retrato</span><span>85mm · f/2.8</span></div></div>
       <div class="prose">
         <p class="meta">01 · Sesiones de retrato</p>
         <h2 style="font-size:clamp(32px,5vw,48px);color:var(--ink)">Retratos y sesiones</h2>
@@ -518,17 +525,18 @@ footer.site p { font-size: 14px; color: var(--gray); }
 
     <section class="block">
       <div class="block-head"><h2>Alquiler de estudio</h2><p class="meta">03 · Por horas</p></div>
-      <div class="split">
+      <div class="split fit">
         <div class="prose">
           <p>Para fotógrafos, creadores de contenido, marcas y emprendedores que necesitan un espacio profesional. Reserva por horas y encuentra todo listo al llegar.</p>
           <div class="btn-row"><a class="btn" href="#contacto" data-go="contacto" data-service="Alquiler de estudio (cotización)">Pedir cotización</a></div>
+          <dl class="spec one">
+            <div><dt class="meta">Tiempo</dt><dd>Alquiler por horas. Consulta disponibilidad y tarifa.</dd></div>
+            <div><dt class="meta">Luz</dt><dd>Iluminación de estudio incluida: flashes, luz continua y modificadores.</dd></div>
+            <div><dt class="meta">Fondos</dt><dd>Ciclorama blanco y fondos de papel.</dd></div>
+            <div><dt class="meta">Camerino</dt><dd>Espacio para cambio de ropa, maquillaje y preparación.</dd></div>
+          </dl>
         </div>
-        <dl class="spec">
-          <div><dt class="meta">Tiempo</dt><dd>Alquiler por horas. Consulta disponibilidad y tarifa.</dd></div>
-          <div><dt class="meta">Luz</dt><dd>Iluminación de estudio incluida: flashes, luz continua y modificadores.</dd></div>
-          <div><dt class="meta">Fondos</dt><dd>Ciclorama blanco y fondos de papel.</dd></div>
-          <div><dt class="meta">Camerino</dt><dd>Espacio para cambio de ropa, maquillaje y preparación.</dd></div>
-        </dl>
+        <div class="frame photo"><img src="fotos/estudio-2.jpg" alt="Set del estudio: fondo de papel amarillo, luz con softbox y reflector" loading="lazy" draggable="false"><i class="corner tl"></i><i class="corner tr"></i><div class="exif" aria-hidden="true"><span>El estudio</span><span>f/8 · 1/200</span></div></div>
       </div>
     </section>
   </div>
@@ -617,12 +625,12 @@ footer.site p { font-size: 14px; color: var(--gray); }
         <p>Creemos que una buena foto empieza por hacer sentir cómodo a quien está frente a la cámara. Por eso cada sesión es tranquila, guiada y sin prisas.</p>
         <p>Trabajamos con luz de estudio controlada y un retoque cuidadoso, para que tus fotos se vean bien hoy y dentro de muchos años.</p>
       </div>
-      <div class="frame mark-frame" aria-hidden="true"><i class="corner tl"></i><i class="corner tr"></i><span class="logo logo-mark"></span><div class="exif"><span>Nuna Photo Studio</span><span>Santo Domingo</span></div></div>
+      <div class="frame photo"><img src="fotos/estudio-2.jpg" alt="Nuestro estudio en Santo Domingo" loading="lazy" draggable="false"><i class="corner tl"></i><i class="corner tr"></i><div class="exif" aria-hidden="true"><span>Nuna Photo Studio</span><span>Santo Domingo</span></div></div>
     </section>
     <section class="block">
       <div class="block-head"><h2>La fotógrafa</h2><p class="meta">Fundadora de Nuna Photo Studio</p></div>
       <div class="split">
-        <div class="frame" aria-hidden="true"><i class="corner tl"></i><i class="corner tr"></i><div class="exif"><span>Dariana Méndez Ramírez</span><span>85mm · f/2</span></div></div>
+        <div class="frame photo"><img src="fotos/dariana.jpg" alt="Dariana Méndez Ramírez, fotógrafa de Nuna Photo Studio, con su cámara" loading="lazy" draggable="false" style="object-position: 50% 20%"><i class="corner tl"></i><i class="corner tr"></i><div class="exif" aria-hidden="true"><span>Dariana Méndez Ramírez</span><span>85mm · f/2</span></div></div>
         <div class="prose">
           <h3 class="person-name">Dariana Méndez Ramírez</h3>
           <dl class="facts">
@@ -1027,6 +1035,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
     { cat: "estudio", title: "Retrato masculino", src: "fotos/retrato-masculino-1.jpg", size: "t" },
     { cat: "bodas", title: "El ramo", src: "fotos/boda-2.jpg", size: "t" },
     { cat: "estudio", title: "Primeros meses", src: "fotos/retrato-de-nino-1.jpg", size: "t" },
+    { cat: "estudio", title: "Hermanitas", src: "fotos/retrato-de-nino-2.jpg", size: "w" },
     { cat: "estudio", title: "Cake smash", src: "fotos/retrato-de-nino-3.jpg", size: "w" },
     { cat: "quince", title: "Quinceañera", src: "fotos/retrato-quincenanera-1.jpg", size: "t" },
     { cat: "estudio", title: "Elegancia en negro", src: "fotos/retrato-modelo-femenina-3.jpg", size: "t" },
