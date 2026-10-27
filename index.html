@@ -388,8 +388,9 @@ body.lb-open { overflow: hidden; }
 .terms-body ul { margin: 0; padding-left: 20px; display: grid; gap: 8px; color: var(--ink-soft); }
 .form-terms { font-size: 13px; color: var(--gray); }
 footer.site a { color: var(--gray); font-size: 14px; text-underline-offset: 4px; }
-footer.site .wrap > a[data-go="terminos"] { flex-basis: 100%; text-align: center; padding-top: 20px; margin-top: 4px; border-top: 1px solid var(--line); text-decoration: none; }
-footer.site .wrap > a[data-go="terminos"]:hover { color: var(--ink); text-decoration: underline; }
+footer.site .foot-links { flex-basis: 100%; align-self: stretch; display: flex; justify-content: center; flex-wrap: wrap; column-gap: 28px; padding-top: 20px; margin-top: 4px; border-top: 1px solid var(--line); }
+footer.site .foot-links a { display: inline-flex; align-items: center; min-height: 40px; text-decoration: none; }
+footer.site .foot-links a:hover { color: var(--ink); text-decoration: underline; }
 
 .quotes { display: grid; gap: 16px; grid-template-columns: 1fr; }
 @media (min-width: 640px) { .quotes { grid-template-columns: repeat(2, 1fr); } }
@@ -459,6 +460,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
   @keyframes develop { from { transform: translateY(8px); } to { transform: none; } }
 }
 
+#preguntas { scroll-margin-top: 100px; }
 .faq { border-top: 1px solid var(--line); }
 .faq-item { border-bottom: 1px solid var(--line); }
 .faq-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding-block: 18px; font-size: 18px; font-weight: 500; letter-spacing: -.01em; }
@@ -923,6 +925,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
         </div>
         <p class="status" id="f-status"></p>
         <p class="form-terms">Al enviar tu solicitud aceptas nuestros <a href="#terminos" data-go="terminos">términos y condiciones</a>.</p>
+        <p class="form-terms">¿Dudas sobre pagos, entrega o parqueo? Revisa las <a href="#preguntas" data-go="preguntas">preguntas frecuentes</a>.</p>
       </form>
 
       <div class="contact-list">
@@ -1063,7 +1066,10 @@ footer.site p { font-size: 14px; color: var(--gray); }
     <p>© <span id="yr">2026</span> Nuna Photo Studio · Santo Domingo</p>
     <p>849-377-8517 · nunaphotostudio@gmail.com</p>
     <div class="soc-row" data-social="row"></div>
-    <a href="#terminos" data-go="terminos">Términos y condiciones</a>
+    <nav class="foot-links" aria-label="Información">
+      <a href="#preguntas" data-go="preguntas">Preguntas frecuentes</a>
+      <a href="#terminos" data-go="terminos">Términos y condiciones</a>
+    </nav>
   </div>
 </footer>
 
@@ -1107,7 +1113,11 @@ footer.site p { font-size: 14px; color: var(--gray); }
   var links = document.querySelectorAll("nav.main a");
   var names = Array.prototype.map.call(views, function (v) { return v.getAttribute("data-view"); });
   var homeTitle = document.title;
+  // Secciones con enlace propio dentro de una página
+  var SECTIONS = { preguntas: "planes" };
   function show(name, scroll) {
+    var section = SECTIONS[name] ? name : null;
+    if (section) name = SECTIONS[section];
     if (names.indexOf(name) < 0) name = "inicio";
     views.forEach(function (v) { v.hidden = v.getAttribute("data-view") !== name; });
     links.forEach(function (a) {
@@ -1117,7 +1127,8 @@ footer.site p { font-size: 14px; color: var(--gray); }
     var navLink = document.querySelector('nav.main a[data-go="' + name + '"]');
     var label = navLink ? navLink.textContent : document.getElementById("v-" + name).getAttribute("data-title");
     document.title = name === "inicio" ? homeTitle : label + " · Nuna Photo Studio";
-    if (scroll) window.scrollTo(0, 0);
+    if (section) document.getElementById(section).scrollIntoView({ block: "start" });
+    else if (scroll) window.scrollTo(0, 0);
     setMenu(false);
   }
   var header = document.querySelector("header.site"), menuBtn = document.getElementById("menu-btn");
