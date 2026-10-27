@@ -317,6 +317,20 @@
     if (a) track(a.getAttribute("data-track"));
   });
 
+  // Reseñas de clientes (solo en Inicio). Copiadas de Google con el nombre que el cliente muestra allí.
+  // { name: "Nombre", text: "Lo que escribió", service: "Tipo de sesión (opcional)" }
+  // Si la lista está vacía, solo se muestra la calificación.
+  var REVIEWS = [];
+  var reviewsBox = document.getElementById("reviews");
+  if (reviewsBox && REVIEWS.length) {
+    var esc = function (t) { var d = document.createElement("div"); d.textContent = t; return d.innerHTML; };
+    reviewsBox.innerHTML = REVIEWS.map(function (r) {
+      return '<figure class="quote-card"><blockquote>' + esc(r.text) + '</blockquote>' +
+        '<figcaption><b>' + esc(r.name) + '</b><span>' + (r.service ? esc(r.service) + " · " : "") + '★★★★★ en Google</span></figcaption></figure>';
+    }).join("");
+    reviewsBox.hidden = false;
+  }
+
   // Slide de fotos del hero (solo en Inicio). Las demás fotos se cargan después de la página.
   var slides = document.querySelectorAll(".hero-slides img");
   if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {

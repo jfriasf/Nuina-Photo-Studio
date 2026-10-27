@@ -397,3 +397,15 @@ footer.site p { font-size: 14px; color: var(--gray); }
 .faq-item p { margin: 0 0 20px; max-width: 70ch; color: var(--ink-soft); }
 .faq-more { margin-top: 24px; color: var(--ink-soft); }
 .faq-more a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
+
+/* Reseñas de clientes (Inicio) */
+.rating { display: flex; align-items: center; gap: 20px 28px; flex-wrap: wrap; padding: 28px; border: 1px solid var(--line); background: var(--surface); }
+.rating-score { font-size: clamp(56px, 9vw, 88px); font-weight: 600; letter-spacing: -.05em; line-height: .9; }
+.rating-text { flex: 1 1 220px; display: grid; gap: 6px; color: var(--ink-soft); }
+.stars { color: var(--ink); font-size: 22px; letter-spacing: .12em; }
+.quotes-grid { display: grid; gap: 16px; margin-top: 16px; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); }
+.quote-card { display: grid; gap: 16px; align-content: space-between; padding: 28px 24px; border: 1px solid var(--line); background: var(--surface); margin: 0; }
+.quote-card blockquote { margin: 0; font-size: 17px; line-height: 1.55; color: var(--ink); }
+.quote-card blockquote::before { content: "“"; display: block; font-size: 48px; line-height: .6; color: var(--gray); margin-bottom: 8px; }
+.quote-card figcaption { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-size: 14px; color: var(--ink-soft); }
+.quote-card figcaption b { color: var(--ink); font-weight: 600; }
