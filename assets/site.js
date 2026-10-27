@@ -310,6 +310,23 @@
     if (a) track(a.getAttribute("data-track"));
   });
 
+  // Slide de fotos del hero (solo en Inicio). Las demás fotos se cargan después de la página.
+  var slides = document.querySelectorAll(".hero-slides img");
+  if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    window.addEventListener("load", function () {
+      slides.forEach(function (img) { if (img.dataset.src) img.src = img.dataset.src; });
+    });
+    var si = 0;
+    setInterval(function () {
+      if (document.hidden) return;
+      var next = (si + 1) % slides.length;
+      if (!slides[next].complete || !slides[next].naturalWidth) return;
+      slides[si].classList.remove("on");
+      slides[next].classList.add("on");
+      si = next;
+    }, 5000);
+  }
+
   // Lectura de exposición del hero (solo en Inicio)
   var readout = document.getElementById("readout");
   if (readout && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
