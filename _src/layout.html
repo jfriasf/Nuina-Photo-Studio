@@ -1,0 +1,77 @@
+<!doctype html>
+<!-- Página generada por _src/build.py. No editar aquí: cambia _src/ y vuelve a ejecutar el script. -->
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>if (location.protocol === "http:" && /(^|\.)nunaphotostudio\.com$/.test(location.hostname)) location.replace("https://nunaphotostudio.com" + location.pathname + location.search + location.hash);</script>
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="author" content="Nuna Photo Studio">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cloud.umami.is; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="theme-color" content="#111213">
+<link rel="canonical" href="{{url}}">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/icon-192.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="geo.region" content="DO-01">
+<meta name="geo.placename" content="Santo Domingo">
+<meta name="geo.position" content="18.55018;-69.85361">
+<meta name="ICBM" content="18.55018, -69.85361">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_DO">
+<meta property="og:site_name" content="Nuna Photo Studio">
+<meta property="og:url" content="{{url}}">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:image" content="https://nunaphotostudio.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Nuna Photo Studio, estudio de fotografía en Santo Domingo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@nunaphotostudio">
+<meta name="twitter:title" content="{{title}}">
+<meta name="twitter:description" content="{{description}}">
+<meta name="twitter:image" content="https://nunaphotostudio.com/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300..700;1,14..32,300..700&display=swap">
+<link rel="stylesheet" href="/assets/site.css?v={{css_v}}">
+{{umami}}
+{{head_extra}}
+</head>
+<body>
+
+{{partial_sprite}}
+
+{{partial_float}}
+{{partial_toast}}
+
+<header class="site">
+  <div class="wrap bar">
+    <a class="brand" href="/" aria-label="Nuna Photo Studio, inicio"><span class="logo logo-full"></span></a>
+    <button class="menu-btn" id="menu-btn" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Abrir menú"><i></i></button>
+    <nav class="main" id="main-nav" aria-label="Principal">
+      <ul>
+{{nav}}
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="view" id="v-{{name}}">
+{{content}}
+</div>
+</main>
+
+{{cta}}
+
+{{partial_footer}}
+
+<script src="/assets/site.js?v={{js_v}}"></script>
+</body>
+</html>

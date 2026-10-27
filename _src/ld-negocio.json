@@ -1,0 +1,45 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["LocalBusiness", "ProfessionalService"],
+  "@id": "https://nunaphotostudio.com/#negocio",
+  "name": "Nuna Photo Studio",
+  "description": "Estudio de fotografía en Santo Domingo: retratos, sesiones familiares, quinceaños, graduaciones, bodas, cobertura de eventos y alquiler de estudio.",
+  "url": "https://nunaphotostudio.com/",
+  "logo": "https://nunaphotostudio.com/assets/icon-512.png",
+  "image": "https://nunaphotostudio.com/assets/og-image.jpg",
+  "telephone": "+1-849-377-8517",
+  "email": "nunaphotostudio@gmail.com",
+  "priceRange": "RD$950 - RD$3,800",
+  "currenciesAccepted": "DOP",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "C. República Dominicana 10, Segundo Nivel",
+    "addressLocality": "Santo Domingo",
+    "postalCode": "11404",
+    "addressCountry": "DO"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 18.55018, "longitude": -69.85361 },
+  "hasMap": "https://www.google.com/maps/search/?api=1&query=H42W%2B3G9%2C%20Santo%20Domingo%2011404",
+  "areaServed": "Santo Domingo",
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "10:00", "closes": "19:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "16:00", "closes": "20:00" }
+  ],
+  "founder": { "@type": "Person", "name": "Dariana Méndez Ramírez", "jobTitle": "Fotógrafa profesional" },
+  "sameAs": [
+    "https://www.instagram.com/nunaphotostudio",
+    "https://www.facebook.com/profile.php?id=100063495369437",
+    "https://www.tiktok.com/@nunaphotostudio",
+    "https://x.com/nunaphotostudio"
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Planes de sesión",
+    "itemListElement": [
+      { "@type": "Offer", "name": "Individual Básico", "price": "950", "priceCurrency": "DOP", "description": "3 imágenes digitales, 1 persona, 30 minutos" },
+      { "@type": "Offer", "name": "Individual Complementario", "price": "1800", "priceCurrency": "DOP", "description": "5 imágenes digitales, 2 personas, 30 minutos" },
+      { "@type": "Offer", "name": "Individual Max", "price": "2500", "priceCurrency": "DOP", "description": "7 imágenes digitales, 3 personas, 1 cambio de vestuario, 45 minutos" },
+      { "@type": "Offer", "name": "Familiar", "price": "3800", "priceCurrency": "DOP", "description": "10 imágenes digitales, 5 personas, 1 cambio de vestuario, 1 hora" }
+    ]
+  }
+}

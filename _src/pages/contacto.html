@@ -1,0 +1,53 @@
+title: Contacto y reservas | Nuna Photo Studio, Santo Domingo
+description: Pide tu cita en Nuna Photo Studio: escríbenos por WhatsApp al 849-377-8517. Segundo nivel, C. República Dominicana 10, Santo Domingo. Horario y ubicación.
+path: /contacto/
+jsonld: negocio
+cta: no
+---
+  <div class="wrap">
+    <div class="page-title">
+      <p class="meta">Contacto</p>
+      <h1>Pide tu cita.</h1>
+      <p class="lede">Completa el formulario y envíanos tu solicitud por WhatsApp, o contáctanos directamente.</p>
+    </div>
+    <section class="block split">
+      <form class="booking" id="booking" novalidate>
+        <div class="two">
+          <div class="field"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" autocomplete="name" placeholder="Tu nombre" required></div>
+          <div class="field"><label for="f-tel">Teléfono</label><input id="f-tel" name="tel" type="tel" autocomplete="tel" placeholder="809 000 0000"></div>
+        </div>
+        <div class="field"><label for="f-servicio">Servicio</label>
+          <select id="f-servicio" name="servicio"></select>
+        </div>
+        <div class="two">
+          <div class="field"><label for="f-fecha">Fecha</label><input id="f-fecha" name="fecha" type="date"></div>
+          <div class="field"><label for="f-hora">Hora (citas de 1 hora)</label>
+            <select id="f-hora" name="hora" disabled><option value="">Elige primero la fecha</option></select>
+          </div>
+        </div>
+        <p class="hours-note">Lunes a viernes de 10:00 a. m. a 7:00 p. m. · Sábado y domingo de 4:00 p. m. a 8:00 p. m.</p>
+        <div class="field"><label for="f-msg">Mensaje</label><textarea id="f-msg" name="msg" placeholder="Cuéntanos qué tienes en mente: número de personas, estilo, horario…"></textarea></div>
+        <div class="field"><label for="f-preview">Mensaje que se enviará</label><div class="preview" id="f-preview" aria-live="polite"></div></div>
+        <div class="btn-row">
+          <a class="btn" id="wa-send" href="https://wa.me/18493778517" target="_blank" rel="noopener">Enviar por WhatsApp</a>
+          <button class="btn ghost" type="button" id="copy-msg">Copiar mensaje</button>
+        </div>
+        <p class="status" id="f-status"></p>
+        <p class="form-terms">Al enviar tu solicitud aceptas nuestros <a href="/terminos/">términos y condiciones</a>.</p>
+        <p class="form-terms">¿Dudas sobre pagos, entrega o parqueo? Revisa las <a href="/planes/#preguntas">preguntas frecuentes</a>.</p>
+      </form>
+
+      <div class="contact-list">
+        <div><span class="meta">Teléfono y WhatsApp</span>
+          <div class="row"><span class="val">849-377-8517</span><button class="mini" type="button" data-copy="8493778517">Copiar</button><a class="mini" href="https://wa.me/18493778517" target="_blank" rel="noopener" data-track="WhatsApp: contacto">WhatsApp</a></div></div>
+        <div><span class="meta">Correo</span>
+          <div class="row"><span class="val">nunaphotostudio@gmail.com</span><button class="mini" type="button" data-copy="nunaphotostudio@gmail.com">Copiar</button></div></div>
+        <div><span class="meta">Horario de citas</span>
+          <dl class="hours"><dt>Lunes a viernes</dt><dd>10:00 a. m. – 7:00 p. m.</dd><dt>Sábado y domingo</dt><dd>4:00 p. m. – 8:00 p. m.</dd></dl></div>
+        <div><span class="meta">Dirección</span>
+          <div class="row"><span class="val">Segundo nivel, C. República Dominicana 10, Santo Domingo 11404</span></div>
+          <div class="row"><span class="meta">Código de ubicación: H42W+3G9</span><button class="mini" type="button" data-copy="H42W+3G9, C. República Dominicana 10, Santo Domingo 11404">Copiar</button></div>
+          <div class="row"><a class="mini" href="https://www.google.com/maps/search/?api=1&amp;query=H42W%2B3G9%2C%20Santo%20Domingo%2011404" target="_blank" rel="noopener">Ver en Google Maps</a></div></div>
+      </div>
+    </section>
+  </div>
