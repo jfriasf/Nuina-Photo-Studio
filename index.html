@@ -114,6 +114,9 @@ header.site.open .menu-btn i::after { transform: translateY(-6px) rotate(-45deg)
 .frame .corner.tl { top: 12px; left: 12px; border-top: 1px solid; border-left: 1px solid; }
 .frame .corner.tr { top: 12px; right: 12px; border-top: 1px solid; border-right: 1px solid; }
 .frame.wide { aspect-ratio: 3 / 2; }
+.frame.photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; pointer-events: none; }
+.frame.photo::after { background-image: linear-gradient(to top, rgba(0,0,0,.55), transparent 45%); mix-blend-mode: normal; opacity: 1; }
+.frame.photo .exif { color: #f3f3f2; }
 .frame.sq { aspect-ratio: 1; }
 
 /* Vistas */
@@ -464,7 +467,7 @@ footer.site p { font-size: 14px; color: var(--gray); }
         <a class="more" href="#servicios" data-go="servicios">Más sobre eventos</a>
       </article>
       <article class="svc">
-        <div class="frame wide" aria-hidden="true"><div class="exif"><span>Ciclorama</span><span>f/8 · 1/200</span></div></div>
+        <div class="frame wide photo"><img src="fotos/estudio.jpg" alt="Nuestro estudio: luces, fondos, reflector y sala de espera" loading="lazy" draggable="false"><div class="exif" aria-hidden="true"><span>El estudio</span><span>f/8 · 1/200</span></div></div>
         <h3>Alquiler de estudio</h3>
         <p>Alquila el estudio por horas, con iluminación, fondos, ciclorama y camerino listos para tu producción.</p>
         <a class="more" href="#servicios" data-go="servicios">Qué incluye</a>
