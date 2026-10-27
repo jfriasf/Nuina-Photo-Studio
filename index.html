@@ -458,7 +458,114 @@ footer.site p { font-size: 14px; color: var(--gray); }
   .view:not([hidden]) { animation: develop .5s ease-out both; }
   @keyframes develop { from { transform: translateY(8px); } to { transform: none; } }
 }
+
+.faq { border-top: 1px solid var(--line); }
+.faq-item { border-bottom: 1px solid var(--line); }
+.faq-item summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; min-height: 44px; padding-block: 18px; font-size: 18px; font-weight: 500; letter-spacing: -.01em; }
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after { content: "+"; flex: none; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 50%; font-weight: 400; transition: transform .25s ease; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item summary:hover { color: var(--ink-soft); }
+.faq-item p { margin: 0 0 20px; max-width: 70ch; color: var(--ink-soft); }
+.faq-more { margin-top: 24px; color: var(--ink-soft); }
+.faq-more a { color: var(--ink); text-decoration: underline; text-underline-offset: 4px; }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "¿Cómo reservo mi cita?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Elige tu plan y escríbenos por el formulario de esta web o por WhatsApp al 849-377-8517 con la fecha y hora que prefieres. Te confirmamos disponibilidad y la cita queda reservada al recibir el depósito."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Cuánto es el depósito y cómo pago?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Para reservar se paga un depósito del 50 %. El resto se paga el día de la sesión, antes de comenzar. Aceptamos efectivo y transferencia bancaria."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿En cuánto tiempo recibo mis fotos?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Las fotos de sesión se entregan editadas en formato digital en 5 a 7 días hábiles después de que elijas tus favoritas. Las de eventos se entregan en una galería digital en un plazo de 15 días hábiles."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo elegir las fotos que se editan?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Después de la sesión te enviamos una selección de pruebas y tú eliges las que se editan, según la cantidad que incluye tu plan."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo comprar fotos adicionales?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Sí. Si te gustan más fotos de las que incluye tu plan, puedes agregar imágenes adicionales. Escríbenos por WhatsApp y te confirmamos el precio."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo traer más personas o cambiarme de ropa?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cada plan incluye un número de personas y de cambios de vestuario. Las personas adicionales tienen un costo extra. Contamos con camerino para cambiarte y prepararte."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué llevo a la sesión?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Trae tu ropa planchada y los accesorios que quieras usar. Los colores lisos suelen verse mejor que los estampados pequeños. Si tienes dudas sobre qué ponerte, escríbenos antes y te orientamos."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Puedo cambiar la fecha o cancelar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Puedes cambiar la fecha una vez sin costo avisando con al menos 24 horas de anticipación, sujeto a disponibilidad. Si cancelas con menos de 24 horas o no te presentas, el depósito no es reembolsable."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Qué pasa si llego tarde?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "La sesión comienza a la hora reservada. Si llegas tarde, el tiempo perdido se descuenta de la sesión, así que te recomendamos llegar unos minutos antes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Hay parqueo?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "El estudio está en un segundo nivel en la C. República Dominicana 10, Santo Domingo. El parqueo es en la calle, frente o cerca del estudio."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "¿Entregan los archivos sin editar?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Entregamos solo imágenes editadas. Los archivos originales sin editar (RAW) no se entregan."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -685,6 +792,57 @@ footer.site p { font-size: 14px; color: var(--gray); }
         <li><div><b>Confirma la cita</b><span>Te confirmamos disponibilidad, hora y detalles de la sesión.</span></div></li>
         <li><div><b>Ven al estudio</b><span>Llega a la hora acordada. Nosotros nos ocupamos de la luz.</span></div></li>
       </ol>
+    </section>
+
+    <section class="block" id="preguntas">
+      <div class="block-head"><h2>Preguntas frecuentes</h2><p class="meta">11 respuestas</p></div>
+      <div class="faq">
+        <details class="faq-item">
+          <summary>¿Cómo reservo mi cita?</summary>
+          <p>Elige tu plan y escríbenos por el formulario de esta web o por WhatsApp al 849-377-8517 con la fecha y hora que prefieres. Te confirmamos disponibilidad y la cita queda reservada al recibir el depósito.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Cuánto es el depósito y cómo pago?</summary>
+          <p>Para reservar se paga un depósito del 50 %. El resto se paga el día de la sesión, antes de comenzar. Aceptamos efectivo y transferencia bancaria.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿En cuánto tiempo recibo mis fotos?</summary>
+          <p>Las fotos de sesión se entregan editadas en formato digital en 5 a 7 días hábiles después de que elijas tus favoritas. Las de eventos se entregan en una galería digital en un plazo de 15 días hábiles.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Puedo elegir las fotos que se editan?</summary>
+          <p>Sí. Después de la sesión te enviamos una selección de pruebas y tú eliges las que se editan, según la cantidad que incluye tu plan.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Puedo comprar fotos adicionales?</summary>
+          <p>Sí. Si te gustan más fotos de las que incluye tu plan, puedes agregar imágenes adicionales. Escríbenos por WhatsApp y te confirmamos el precio.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Puedo traer más personas o cambiarme de ropa?</summary>
+          <p>Cada plan incluye un número de personas y de cambios de vestuario. Las personas adicionales tienen un costo extra. Contamos con camerino para cambiarte y prepararte.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué llevo a la sesión?</summary>
+          <p>Trae tu ropa planchada y los accesorios que quieras usar. Los colores lisos suelen verse mejor que los estampados pequeños. Si tienes dudas sobre qué ponerte, escríbenos antes y te orientamos.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Puedo cambiar la fecha o cancelar?</summary>
+          <p>Puedes cambiar la fecha una vez sin costo avisando con al menos 24 horas de anticipación, sujeto a disponibilidad. Si cancelas con menos de 24 horas o no te presentas, el depósito no es reembolsable.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Qué pasa si llego tarde?</summary>
+          <p>La sesión comienza a la hora reservada. Si llegas tarde, el tiempo perdido se descuenta de la sesión, así que te recomendamos llegar unos minutos antes.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Hay parqueo?</summary>
+          <p>El estudio está en un segundo nivel en la C. República Dominicana 10, Santo Domingo. El parqueo es en la calle, frente o cerca del estudio.</p>
+        </details>
+        <details class="faq-item">
+          <summary>¿Entregan los archivos sin editar?</summary>
+          <p>No. Entregamos solo imágenes editadas. Los archivos originales sin editar (RAW) no se entregan.</p>
+        </details>
+      </div>
+      <p class="faq-more">¿Tienes otra pregunta? <a href="#contacto" data-go="contacto">Escríbenos</a> o lee los <a href="#terminos" data-go="terminos">términos y condiciones</a>.</p>
     </section>
   </div>
 </div>
