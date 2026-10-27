@@ -60,6 +60,16 @@
   <button class="sf-toggle" id="sf-toggle" type="button" aria-expanded="false" aria-controls="sf-list" aria-label="Mostrar redes sociales"><svg><use href="#i-share"/></svg></button>
 </aside>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
+  <div class="lb-top"><span id="lb-count"></span><button class="lb-btn" type="button" id="lb-close" aria-label="Cerrar">×</button></div>
+  <div class="lb-stage">
+    <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Foto anterior">‹</button>
+    <img id="lb-img" alt="" draggable="false">
+    <div class="lb-shield" aria-hidden="true"></div>
+    <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Foto siguiente">›</button>
+  </div>
+  <p class="lb-cap" id="lb-cap"></p>
+</div>
 
 <header class="site">
   <div class="wrap bar">
@@ -92,16 +102,6 @@
       <p class="pf-empty" id="pf-empty" hidden>Pronto publicaremos trabajos de esta categoría.</p>
     </section>
   </div>
-<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Visor de fotos" hidden>
-  <div class="lb-top"><span id="lb-count"></span><button class="lb-btn" type="button" id="lb-close" aria-label="Cerrar">×</button></div>
-  <div class="lb-stage">
-    <button class="lb-btn lb-prev" type="button" id="lb-prev" aria-label="Foto anterior">‹</button>
-    <img id="lb-img" alt="" draggable="false">
-    <div class="lb-shield" aria-hidden="true"></div>
-    <button class="lb-btn lb-next" type="button" id="lb-next" aria-label="Foto siguiente">›</button>
-  </div>
-  <p class="lb-cap" id="lb-cap"></p>
-</div>
 </div>
 </main>
 
@@ -125,6 +125,6 @@
   </div>
 </footer>
 
-<script src="/assets/site.js?v=113e1e15"></script>
+<script src="/assets/site.js?v=e3f7247b"></script>
 </body>
 </html>

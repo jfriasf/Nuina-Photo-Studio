@@ -28,7 +28,8 @@ python _src/build.py
 - `_src/ld-*.json`: datos estructurados para Google (ficha del negocio y preguntas frecuentes).
 - `assets/site.css` y `assets/site.js`: estilos y comportamiento de todas las páginas.
 - `assets/`: logos, íconos e imagen para compartir.
-- `fotos/`: fotos optimizadas para web (máx. 1600 px).
+- `fotos/`: fotos optimizadas para web (máx. 1600 px). Para agregar una, ponla aquí como `.jpg` y vuelve a armar.
+- `fotos/webp/`: versiones WebP de cada foto en 480, 800, 1200 y 1600 px. Las genera `_src/build.py` (necesita Pillow) y las páginas las usan con `srcset`, para que cada pantalla descargue el tamaño que necesita.
 
 GitHub Pages no publica `_src/`, porque las carpetas que empiezan con `_` se ignoran.
 

@@ -12,6 +12,11 @@
       items: ["10 imágenes digitales", "5 personas", "1 cambio de vestuario", "1 hora de sesión"] }
   ];
   var WA = "18493778517";
+
+  // Versiones WebP de cada foto (las crea _src/build.py en fotos/webp/ con estos anchos)
+  var WIDTHS = [480, 800, 1200, 1600];
+  function webp(src, w) { return src.replace("/fotos/", "/fotos/webp/").replace(/\.jpg$/, "") + "-" + w + ".webp"; }
+  function srcset(src) { return WIDTHS.map(function (w) { return webp(src, w) + " " + w + "w"; }).join(", "); }
   var fmt = function (n) { return n.toLocaleString("es-DO"); };
 
   // Tarjetas de planes
@@ -200,7 +205,9 @@
     var catLabel = {}; CATS.forEach(function (c) { catLabel[c.id] = c.label; });
     grid.innerHTML = WORKS.map(function (w, i) {
       return '<figure class="pf ' + w.size + '" data-cat="' + w.cat + '" data-i="' + i + '" tabindex="0" role="button" aria-label="Ver ' + w.title + '">' +
-        (w.src ? '<img src="' + w.src + '" alt="' + w.title + '" loading="lazy" draggable="false">' : '') +
+        (w.src ? '<img src="' + webp(w.src, 800) + '" srcset="' + srcset(w.src) + '" sizes="' +
+          (w.size === "w" || w.size === "xl" ? "(min-width: 720px) 50vw, 100vw" : "(min-width: 720px) 25vw, 50vw") +
+          '" alt="' + w.title + '" loading="lazy" draggable="false">' : '') +
         '<figcaption><span>' + catLabel[w.cat] + '</span><b>' + w.title + '</b></figcaption></figure>';
     }).join("");
     var filters = document.getElementById("filters");
@@ -229,7 +236,7 @@
     var lbList = [], lbPos = 0, lbReturn = null;
     function lbShow() {
       var w = WORKS[lbList[lbPos]];
-      lbImg.src = w.src; lbImg.alt = w.title;
+      lbImg.src = webp(w.src, 1600); lbImg.alt = w.title;
       lbCap.textContent = w.title;
       lbCount.textContent = catLabel[w.cat] + " · " + (lbPos + 1) + " / " + lbList.length;
     }
@@ -314,7 +321,10 @@
   var slides = document.querySelectorAll(".hero-slides img");
   if (slides.length > 1 && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
     window.addEventListener("load", function () {
-      slides.forEach(function (img) { if (img.dataset.src) img.src = img.dataset.src; });
+      slides.forEach(function (img) {
+        if (img.dataset.srcset) img.srcset = img.dataset.srcset;
+        if (img.dataset.src) img.src = img.dataset.src;
+      });
     });
     var si = 0;
     setInterval(function () {
